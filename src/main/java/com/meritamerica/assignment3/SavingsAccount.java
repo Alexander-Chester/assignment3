@@ -9,6 +9,18 @@ public class SavingsAccount extends BankAccount{
 	SavingsAccount(double openingBalance) {
 		super(openingBalance,INTEREST_RATE);
 	}
+	SavingsAccount(long accountNumber, double balance, double interestRate){
+		super(accountNumber, interestRate, interestRate);
+	}
+	SavingsAccount(double balance, double interestRate, java.util.Date accountOpenedOn){
+		super(interestRate, interestRate, accountOpenedOn);
+	
+	}
+	
+	SavingsAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn){
+		super(accountNumber, interestRate, interestRate, accountOpenedOn);
+		
+	}
 }
 
 
