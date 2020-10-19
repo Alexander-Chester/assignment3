@@ -1,6 +1,7 @@
 package com.meritamerica.assignment3;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -68,11 +69,12 @@ public class MeritBank {
 		return 0;
 	}
 	public static boolean readFromFile(String fileName) throws ParseException {
+		File file = new File(fileName);
 		
-		BufferedReader reader = openFileReader(fileName);
 		
 			String line;
-			try {
+			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+				while((line = reader.readLine()) != null)
 				line = reader.readLine();
 				int n = Integer.parseInt(line);
 				nextAccountNumber = n;
@@ -143,6 +145,11 @@ public class MeritBank {
 		 }
 		 }
 		 return rd; 
+	}
+	public static AccountHolder[] sortAccountHolders() {
+		for(int i = 0; i < accounts.length; i++) {
+			if(accounts[0].getCombinedBalance())
+		}
 	}
 	
 }

@@ -14,15 +14,15 @@ public class SavingsAccount extends BankAccount{
 		super(openingBalance,INTEREST_RATE);
 	}
 	SavingsAccount(long accountNumber, double balance, double interestRate){
-		super(accountNumber, interestRate, interestRate);
+		super(accountNumber, balance, interestRate);
 	}
 	SavingsAccount(double balance, double interestRate, java.util.Date accountOpenedOn){
-		super(interestRate, interestRate, accountOpenedOn);
+		super(balance, interestRate, accountOpenedOn);
 	
 	}
 	
 	SavingsAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn){
-		super(accountNumber, interestRate, interestRate, accountOpenedOn);
+		super(accountNumber, balance, interestRate, accountOpenedOn);
 		
 	}
 	public static SavingsAccount readFromString(String s) throws ParseException {
@@ -32,7 +32,7 @@ public class SavingsAccount extends BankAccount{
 		double interest = Double.parseDouble(tokens[2]);
 		SimpleDateFormat sdfmt1 = new SimpleDateFormat("dd/MM/yy");
 	
-			Date date = (Date)sdfmt1.parse(tokens[3]);
+		Date date = sdfmt1.parse(tokens[3]);
 	
 		SavingsAccount account = new SavingsAccount(accountNumber, b, interest, date);
 		return account;

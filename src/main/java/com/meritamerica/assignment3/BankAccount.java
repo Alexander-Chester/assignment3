@@ -1,6 +1,10 @@
 package com.meritamerica.assignment3;
 
 import com.meritamerica.assignment3.MeritBank;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 public class BankAccount {
 	
@@ -11,6 +15,7 @@ public class BankAccount {
 	 double accountTotal;
 	private MeritBank m = new MeritBank();
 	java.util.Date accountOpenedOn;
+	private Date date;
 	
 	BankAccount(double balance, double interestRate){
 		this.balance = balance;
@@ -67,9 +72,9 @@ public class BankAccount {
 	}
 	
 	public boolean withdraw(double amount) {
-		this.balance = getCombinedBalance();//create in account Balance
-		if((this.balance - amount) >= 0) {
-			this.balance = this.balance - amount;
+		
+		if((balance - amount) >= 0) {
+			balance = balance - amount;
 			return true;
 		} else
 		return false;
@@ -92,6 +97,20 @@ public class BankAccount {
 
 	public String toString() {
 		return "";
+	}
+	public  Date dateAccountOpened(String string)
+	{
+			try 
+			{
+				DateFormat startDate = new SimpleDateFormat("dd/MM/yyyy"); //sets format
+				Date date = (Date)startDate.parse(string); //converts to date
+	        	this.date = date;
+	        	return this.date;				// returns correct date, but with hrs/min/sec at 00:00:00 didnt know how to eliminate this. 
+			} catch(ParseException e)
+			{
+				System.out.println();
+			}
+			return this.date;
 	}
 }
 
