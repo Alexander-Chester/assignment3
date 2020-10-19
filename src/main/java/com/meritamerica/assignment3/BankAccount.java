@@ -81,7 +81,9 @@ public class BankAccount {
 	}
 	
 	public boolean deposit(double amount) {
-		if((this.balance + amount) <= 250000) {
+		if(amount < 0) {
+			return false;
+		}else if((this.balance + amount) <= 250000) {
 			System.out.println("Deposit bank: "+ amount);
 			this.balance = this.balance + amount;
 			return true;
@@ -91,9 +93,11 @@ public class BankAccount {
 	}
 	
 	public double futureValue(int years) {
-		this.futureValue = balance * Math.pow((1+ interestRate ), years);
-		return this.futureValue;
+		double fv = balance * Math.pow((1+ interestRate ), years);
+		futureValue = fv;
+		return fv;
 	}
+
 
 	public String toString() {
 		return "";

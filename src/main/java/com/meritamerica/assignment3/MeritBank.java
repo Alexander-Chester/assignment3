@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Random;
@@ -55,8 +56,8 @@ public class MeritBank {
 	}
 	
 	public static long getNextAccountNumber() {
-		nextAccountNumber++;
-		return nextAccountNumber-1;
+		
+		return nextAccountNumber;
 		
 	}
 	public static double totalBalances() {
@@ -74,7 +75,7 @@ public class MeritBank {
 		
 			String line;
 			try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-				while((line = reader.readLine()) != null)
+				
 				line = reader.readLine();
 				int n = Integer.parseInt(line);
 				nextAccountNumber = n;
@@ -95,19 +96,24 @@ public class MeritBank {
 					accounts[i] = AccountHolder.readFromString(line);
 					line = reader.readLine();
 					n = Integer.parseInt(line);
-					
+					if (n!=0) {
 						for (int j = 0; j < n; j++) {
 							line = reader.readLine();
 							CheckingAccount acc = CheckingAccount.readFromString(line);
 							accounts[i].addCheckingAccount(acc);
 						}
+					}
+						
 						line = reader.readLine();
 						n = Integer.parseInt(line);
-						for(int k = 0; k < n; k++) {
-							line = reader.readLine();
-							SavingsAccount acc = SavingsAccount.readFromString(line);
-							accounts[i].addSavingsAccount(acc);
+						if (n!=0) {
+							for(int k = 0; k < n; k++) {
+								line = reader.readLine();
+								SavingsAccount acc = SavingsAccount.readFromString(line);
+								accounts[i].addSavingsAccount(acc);
+							}
 						}
+						
 						line = reader.readLine();
 						n = Integer.parseInt(line);
 						if (n!=0) {
@@ -124,11 +130,14 @@ public class MeritBank {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return false;
 				
-			} 
-			
-			
-			
+			} catch (NumberFormatException e) {
+				return false;
+			} catch (NullPointerException e) {
+				System.out.println(e.getMessage());
+				return false;
+			}
 			
 		
 		return true;
@@ -147,9 +156,8 @@ public class MeritBank {
 		 return rd; 
 	}
 	public static AccountHolder[] sortAccountHolders() {
-		for(int i = 0; i < accounts.length; i++) {
-			if(accounts[0].getCombinedBalance())
-		}
+		Arrays.sort(accounts);
+		return accounts;
 	}
 	
 }

@@ -24,6 +24,7 @@ public class CDAccount extends BankAccount {
 	CDAccount(long accountNumber, double balance, double interest, Date date, int term){
 		
 		super(accountNumber, balance, interest, date);
+		this.balance = balance;
 		offering = new CDOffering(term, interest);
 		
 	}

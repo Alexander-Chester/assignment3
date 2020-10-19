@@ -11,18 +11,19 @@ public class MeritAmericaBankApp {
 		String s = "83,10000,0.02,01/02/2020";
 		 SavingsAccount savingsAccount = SavingsAccount.readFromString(s);
 		
+		 AccountHolder accountHolder = new AccountHolder(
+		        	"Sadiq",
+		        	"",
+		        	"Manji",
+		        	"123456789");
+		 CheckingAccount checkingAccount = accountHolder.addCheckingAccount(100);
+
+	        double fv = 100.0 * Math.pow(1 + 0.0001, 3);
+	        
+	       System.out.println(fv + "  "+	checkingAccount.futureValue(3) + "   " + checkingAccount.getInterestRate());
 	       
+			
 		
 		
-		String[] tokens = s.split(",");
-		long ac= Long.parseLong(tokens[0]);
-		double b = Double.parseDouble(tokens[1]);
-		double interest = Double.parseDouble(tokens[2]);
-		SimpleDateFormat sdfmt1 = new SimpleDateFormat("dd/MM/yy");
-	
-		java.util.Date date = sdfmt1.parse(tokens[3]);
-		
-		System.out.println(ac +  "    " + b + "    " + interest +"  "+ date + "    " );
-		System.out.println(savingsAccount.getBalance());
 	}
 }

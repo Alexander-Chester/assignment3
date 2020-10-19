@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class CheckingAccount extends BankAccount{
 	
-	final static double INTEREST_RATE = 0.1/100;
+	final static double INTEREST_RATE = 0.0001;
 	private static double balance;
 	private static Date date;
 

@@ -18,19 +18,19 @@ public class AccountHolder  implements Comparable<AccountHolder>{
 
 	private static final double MAX_BALANCE_AMOUNT = 250000;
 	
-	private String firstName = "";
-	private String middleName = "";
-	private String lastName = "";
-	private String ssn = "";
+	private String firstName ;
+	private String middleName ;
+	private String lastName;
+	private String ssn ;
 	
 	
 	
 	
-	private CheckingAccount[] amountCheckingAccounts = new CheckingAccount[1];
+	private CheckingAccount[] amountCheckingAccounts = new CheckingAccount[0];
 	private CheckingAccount clientCheckingAccount;
 	private double checkingBalance = 0;
 	
-	private SavingsAccount[] amountSavingsAccounts = new SavingsAccount[1];
+	private SavingsAccount[] amountSavingsAccounts = new SavingsAccount[0];
 	private SavingsAccount clientSavingsAccount;
 	private double savingsBalance = 0;
 	
@@ -40,7 +40,7 @@ public class AccountHolder  implements Comparable<AccountHolder>{
 	private CDAccount cdAccount = new CDAccount(cdOffering,0);
 	private double cdBalance = 0;
 	
-	private double combinedBalance = getCombinedBalance();
+	private double combinedBalance = 0;
 	
 	private int counterC = 0;
 	private int counterS = 0;
@@ -49,8 +49,7 @@ public class AccountHolder  implements Comparable<AccountHolder>{
 	private  double totalB = 0;
 	
 	
-	public AccountHolder(){	
-	}
+
 	/**
 	 * AccountHolder Constructor (String, String, String, String)
 	 */
@@ -276,10 +275,10 @@ public class AccountHolder  implements Comparable<AccountHolder>{
 	}
 	@Override
 	public int compareTo(AccountHolder o) {
-		if(combinedBalance < o.getCombinedBalance()) {
+		if(combinedBalance > o.getCombinedBalance()) {
 			return 1;
 		}else {
-			return 0;
+			return -1;
 		}
 		
 		
