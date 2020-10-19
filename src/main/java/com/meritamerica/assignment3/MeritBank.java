@@ -1,5 +1,9 @@
 package com.meritamerica.assignment3;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -7,7 +11,7 @@ public class MeritBank {
 	
 	private static AccountHolder[] accounts = new AccountHolder[0];
 	private static CDOffering[] cdOfferings;
-	
+	private static int nextAccountNumber;
 	private static CDOffering bestCDOffering;
 	private static CDOffering secondBestCDOffering;
 	private static int counterA = 0;
@@ -50,7 +54,9 @@ public class MeritBank {
 	}
 	
 	public static long getNextAccountNumber() {
-		return 0;
+		nextAccountNumber++;
+		return nextAccountNumber-1;
+		
 	}
 	public static double totalBalances() {
 		double tB = 0;
@@ -60,6 +66,83 @@ public class MeritBank {
 	
 	public static double futureValue(double presentValue, double interestRate, int term) {
 		return 0;
+	}
+	public static boolean readFromFile(String fileName) throws ParseException {
+		
+		BufferedReader reader = openFileReader(fileName);
+		
+			String line;
+			try {
+				line = reader.readLine();
+				int n = Integer.parseInt(line);
+				nextAccountNumber = n;
+				line = reader.readLine();
+				n = Integer.parseInt(line);
+				CDOffering[] cdOffers = new CDOffering[n];
+				cdOfferings = cdOffers;
+				for(int i = 0; i < cdOfferings.length; i++) {
+					line = reader.readLine();
+					cdOfferings[i] = CDOffering.readFromString(line);
+					
+				}
+				line = reader.readLine();
+				n = Integer.parseInt(line);
+				accounts = new AccountHolder[n];
+				for(int i = 0; i < accounts.length; i++) {
+					line = reader.readLine();
+					accounts[i] = AccountHolder.readFromString(line);
+					line = reader.readLine();
+					n = Integer.parseInt(line);
+					
+						for (int j = 0; j < n; j++) {
+							line = reader.readLine();
+							CheckingAccount acc = CheckingAccount.readFromString(line);
+							accounts[i].addCheckingAccount(acc);
+						}
+						line = reader.readLine();
+						n = Integer.parseInt(line);
+						for(int k = 0; k < n; k++) {
+							line = reader.readLine();
+							SavingsAccount acc = SavingsAccount.readFromString(line);
+							accounts[i].addSavingsAccount(acc);
+						}
+						line = reader.readLine();
+						n = Integer.parseInt(line);
+						if (n!=0) {
+							for(int l = 0; l < n; l++) {
+								line = reader.readLine();
+								CDAccount acc = CDAccount.readFromString(line);
+								accounts[i].addCDAccount(acc);
+							}
+						}
+						
+						
+					}
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				
+			} 
+			
+			
+			
+			
+		
+		return true;
+		
+	}
+	private static BufferedReader openFileReader(String s) {
+		BufferedReader rd = null;
+		 while (rd == null) {
+		 
+		 try {
+		 rd = new BufferedReader(new FileReader(s));
+		 } catch (IOException ex) {
+		 System.out.println("Can't open that file.");
+		 }
+		 }
+		 return rd; 
 	}
 	
 }

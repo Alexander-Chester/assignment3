@@ -1,4 +1,7 @@
 package com.meritamerica.assignment3;
+
+import java.util.ArrayList;
+
 /**
  * 
  * @author Gio & AJ 
@@ -11,7 +14,7 @@ package com.meritamerica.assignment3;
  * -Savings Account
  *
  */
-public class AccountHolder {
+public class AccountHolder  implements Comparable<AccountHolder>{
 
 	private static final double MAX_BALANCE_AMOUNT = 250000;
 	
@@ -37,7 +40,7 @@ public class AccountHolder {
 	private CDAccount cdAccount = new CDAccount(cdOffering,0);
 	private double cdBalance = 0;
 	
-	private double combinedBalance = 0;
+	private double combinedBalance = getCombinedBalance();
 	
 	private int counterC = 0;
 	private int counterS = 0;
@@ -271,6 +274,26 @@ public class AccountHolder {
 						"Total Balance: $" + getCombinedBalance();
 		return client;
 	}
+	@Override
+	public int compareTo(AccountHolder o) {
+		if(combinedBalance < o.getCombinedBalance()) {
+			return 1;
+		}else {
+			return 0;
+		}
+		
+		
+	}
+	public static AccountHolder readFromString(String line) {
+		String[] tokens = line.split(",",4);
+		String last = tokens[0];
+		String middle = tokens[1];
+		String first = tokens[2];
+		String number = tokens[3];
+		AccountHolder account = new AccountHolder(first, middle,last,number);
+		return account;
+	}
+	
 	
 
 }

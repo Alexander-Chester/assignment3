@@ -45,6 +45,9 @@ public class BankAccount {
 		java.util.Date date = new java.util.Date();
 		return date;
 	}
+	public java.util.Date getOpenedOn(){
+		return accountOpenedOn;
+	}
 	
 	public long getAccountNumber() {
 		System.out.println("AccountNumber");
@@ -64,12 +67,12 @@ public class BankAccount {
 	}
 	
 	public boolean withdraw(double amount) {
-	/*	this.balance = this.client.getCombinedBalance();//create in account Balance
+		this.balance = getCombinedBalance();//create in account Balance
 		if((this.balance - amount) >= 0) {
 			this.balance = this.balance - amount;
 			return true;
 		} else
-	*/		return false;
+		return false;
 	}
 	
 	public boolean deposit(double amount) {

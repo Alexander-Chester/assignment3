@@ -1,5 +1,9 @@
 package com.meritamerica.assignment3;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class CheckingAccount extends BankAccount{
 	
 	final static double INTEREST_RATE = 0.1/100;
@@ -7,6 +11,36 @@ public class CheckingAccount extends BankAccount{
 	CheckingAccount(double openingBalance) {
 		super(openingBalance,INTEREST_RATE);
 	}	
+	
+	
+	
+	CheckingAccount(long accountNumber, double balance, double interestRate){
+		super(accountNumber, interestRate, interestRate);
+	}
+	CheckingAccount(double balance, double interestRate, java.util.Date accountOpenedOn){
+		super(interestRate, interestRate, accountOpenedOn);
+	
+	}
+	
+	CheckingAccount(long accountNumber, double balance, double interestRate, java.util.Date accountOpenedOn){
+		super(accountNumber, interestRate, interestRate, accountOpenedOn);
+		
+	}
+	public static CheckingAccount readFromString(String s) throws ParseException {
+		String[] tokens = s.split(",");
+		long accountNumber = Long.parseLong(tokens[0]);
+		double b = Double.parseDouble(tokens[1]);
+		double interest = Double.parseDouble(tokens[2]);
+		SimpleDateFormat sdfmt1 = new SimpleDateFormat("dd/MM/yy");
+	
+			Date date = (Date)sdfmt1.parse(tokens[3]);
+	
+		CheckingAccount account = new CheckingAccount(accountNumber, b, interest, date);
+		return account;
+		
+		
+		
+	}
 }
 
 /* 

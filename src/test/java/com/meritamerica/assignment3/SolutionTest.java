@@ -337,7 +337,7 @@ public class SolutionTest {
     }
     
     @Test
-    public void testFailedReadFromFile() {    	
+    public void testFailedReadFromFile() throws ParseException {    	
     	boolean result = MeritBank.readFromFile("src/test/testMeritBank_good.txt");
     	assertEquals(true, result);
     	

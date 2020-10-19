@@ -22,5 +22,13 @@ public class CDOffering {
 		return this.interestRate;
 	}
 	
+	public static CDOffering readFromString(String line) {
+		String[] tokens = line.split(",",2);
+		int term = Integer.parseInt(tokens[0]);
+		double interestRate = Double.parseDouble(tokens[1]);
+		CDOffering offer = new CDOffering(term, interestRate);
+		return offer;
+	}
+	
 	
 }
